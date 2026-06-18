@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <!-- Google Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D80CMSQ1YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D80CMSQ1YH');
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  
+  <title>404 Page Not Found | Darinworks</title>
+  <link rel="icon" type="image/png" href="images/ui/favicon.png">
+  <meta name="robots" content="noindex, follow"> 
+  
+  <!-- ดึงฟอนต์และไอคอน -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- ดึง Master Policy จากส่วนกลางมาใช้ -->
+  <link rel="stylesheet" href="css/darinworks.css">
+
+  <!-- สคริปต์ป้องกันการคลิกขวา/F12 ของคุณแบงค์ -->
+  <script>
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        window.location.href = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    });
+    document.onkeydown = function(e) {
+        if (e.keyCode === 123 || 
+           (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 105)) || 
+           (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 117))) {
+            e.preventDefault();
+            window.location.href = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+            return false;
+        }
+    };
+  </script>
+
+  <style>
+    /* ─── CSS จัดกลางพิเศษสำหรับหน้า 404 ─── */
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      width: 100%;
+      text-align: center;
+      margin: 40px 0;
+      opacity: 0; 
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .error-number {
+      font-family: var(--serif);
+      font-size: clamp(80px, 15vw, 150px);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--gold);
+      margin-bottom: 10px;
+      letter-spacing: 5px;
+      text-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+    }
+    .error-message {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+    .page-logo { 
+      width: 60px; 
+      height: 60px; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      border: 1px solid var(--border); 
+      margin-bottom: 30px; 
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <main class="page">
+    
+<div class="brand-logo-container">
+<img src="images/ui/darin-guitar-logo.png" class="logo-guitar" alt="Darin Guitar">
+<div class="logo-divider"></div>
+<img src="images/ui/darin-cue-logo.png" class="logo-cue" alt="Darin Cues">
+
+</div>
+   
+      <!-- ข้อความ 404 -->
+      <h1 class="error-number">404</h1>
+      
+      <div class="ornament" style="margin-bottom: 20px;">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line r"></div>
+      </div>
+      
+      <p class="subtitle" style="margin-bottom: 20px;">PAGE NOT FOUND</p>
+      <p class="error-message">ขออภัย ไม่พบหน้าเว็บไซต์ที่คุณกำลังค้นหา<br>อาจมีการเปลี่ยนลิงก์ หรือเนื้อหาถูกย้ายไปแล้วครับ</p>
+      
+      <!-- ปุ่มกลับหน้าแรก -->
+      <a href="index.html" class="btn" style="max-width: 250px;"><span><i class="fa-solid fa-house" style="margin-right: 8px;"></i> กลับสู่หน้าหลัก</span></a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="brand-logo-container">
+  <img src="images/ui/darin-guitar-logo.png" class="logo-guitar" alt="Darin Guitar">
+  <div class="logo-divider"></div>
+  <img src="images/ui/darin-cue-logo.png" class="logo-cue" alt="Darin Cues">
+</div>
+    
+    <!-- Nav Menu ALL CAPS -->
+    <nav class="minimal-tabs" aria-label="เมนูหลัก">
+      <a href="index.html">HOME</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="https://www.youtube.com/@DarinGuitarsShop" target="_blank" rel="noopener noreferrer">SOUND CHECK</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="gallery.html">GALLERY</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="workshop.html">WORKSHOP</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="prototype.html">PROTOTYPE</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="services.html">SERVICES</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="about.html">ABOUT</a>
+      <span class="separator" aria-hidden="true">·</span>
+      <a href="faq.html">FAQ</a>
+    </nav>
+
+    <p class="footer-note">© Darinworks · Bangkok · Thailand</p>
+  </main>
+</body>
+</html>
