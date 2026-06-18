@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAFAF7">
+  <title>Coming Soon | Bank's Travelogue</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- เชื่อมไฟล์ CSS หลัก -->
+  <link rel="stylesheet" href="css/darinworks.css">
+
+  <style>
+    /* จัดหน้าให้อยู่กึ่งกลางหน้าจอแบบพอดี */
+    .coming-soon-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      text-align: center;
+    }
+    .coming-soon-icon {
+      font-size: 4rem;
+      color: var(--accent-secondary);
+      margin-bottom: 20px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background-color: var(--accent-primary);
+      color: var(--surface-color);
+      border-radius: 30px;
+      font-family: 'Jost', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+    }
+    .back-btn:hover {
+      background-color: var(--accent-secondary);
+      color: var(--surface-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  
+  <main class="page">
+    <div class="coming-soon-wrap">
+      <i class="fa-solid fa-map-location-dot coming-soon-icon"></i>
+      <h1>Coming Soon</h1>
+      <p class="subtitle">จุดหมายนี้ยังรอการเดินทางไปค้นพบ</p>
+      <p class="description">เรื่องราว ภาพถ่าย และบันทึกการเดินทางของทวีปนี้กำลังจะตามมาในอนาคต ขอบคุณที่ติดตามร่วมเดินทางไปด้วยกันครับ</p>
+      
+      <a href="index.html" class="back-btn">กลับสู่หน้าหลัก</a>
+    </div>
+  </main>
+</body>
+</html>
