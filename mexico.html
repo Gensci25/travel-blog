@@ -10,73 +10,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
   <link rel="stylesheet" href="css/darinworks.css">
 
   <style>
+    /* Hero Section */
     .country-hero {
-      position: relative;
-      margin: 20px 0 50px 0;
-      border-radius: 12px;
-      overflow: hidden;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #3E3C38;
+      position: relative; margin: 20px 0 50px 0; border-radius: 12px;
+      overflow: hidden; min-height: 450px; display: flex;
+      align-items: center; justify-content: center; background-color: #3E3C38;
     }
     .hero-text {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      width: 90%;
-      max-width: 800px;
+      position: relative; z-index: 2; text-align: center; color: #fff; width: 90%;
     }
     .hero-text h1 {
-      font-size: 3.5rem;
-      color: #fff;
-      text-shadow: 2px 4px 10px rgba(0,0,0,0.6);
-      margin-bottom: 10px;
+      font-size: 3.5rem; color: #fff; text-shadow: 2px 4px 10px rgba(0,0,0,0.6); margin-bottom: 10px;
+    }
+
+    /* Timeline Specifics */
+    .itinerary-timeline {
+      position: relative; max-width: 800px; margin: 60px auto; padding-left: 30px;
+    }
+    .itinerary-timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background-color: var(--accent-primary); opacity: 0.3;
+    }
+    .itinerary-stop {
+      position: relative; margin-bottom: 40px; padding-left: 30px;
+    }
+    .itinerary-stop::before {
+      content: ''; position: absolute; left: -36px; top: 5px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background-color: var(--surface-color); border: 3px solid var(--accent-primary);
+      box-shadow: 0 0 0 4px var(--surface-color); z-index: 2;
     }
     
-    /* สไตล์สำหรับกล่องเนื้อหา (Split Layout) */
-    .feature-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-bottom: 60px;
-      align-items: center;
+    .stop-location {
+      font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--accent-primary);
+      text-transform: uppercase; letter-spacing: 1px; font-weight: 500; display: block; margin-bottom: 5px;
     }
-    .feature-row:nth-child(even) {
-      flex-direction: row-reverse;
+    .stop-title {
+      font-size: 1.6rem; color: var(--text-main); margin-bottom: 10px; font-family: 'Cormorant Garamond', serif;
     }
-    .feature-text {
-      flex: 1;
-      min-width: 300px;
+    .stop-desc {
+      font-size: 0.95rem; line-height: 1.6; color: var(--text-muted);
     }
-    .feature-text h3 {
-      font-size: 1.8rem;
-      color: var(--accent-primary);
-      margin-bottom: 15px;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    .feature-image {
-      flex: 1;
-      min-width: 300px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      height: 350px;
-    }
-    .feature-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .feature-image:hover img {
-      transform: scale(1.05);
+    .highlight-tag {
+      display: inline-block; padding: 3px 10px; background-color: var(--border-color);
+      border-radius: 4px; font-size: 0.75rem; margin-right: 5px; margin-top: 10px;
     }
   </style>
 </head>
@@ -93,74 +73,70 @@
       <div class="hero-text">
         <span class="flag-icon" style="font-size: 3rem; margin-bottom: 10px; display: block;">🇲🇽</span>
         <span style="font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem;">Chapter 01</span>
-        <h1>Mexico</h1>
-        <p style="font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); margin-top: 10px;">The Ancient Realm & Wild Frontiers</p>
+        <h1>Mexico Expedition</h1>
+        <p style="font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); margin-top: 10px;">The Overland Route: From Canyons to Jungles</p>
       </div>
     </div>
 
-    <div style="text-align: center; max-width: 700px; margin: 0 auto 60px auto;">
-      <p class="description">จุดสตาร์ทของมหากาพย์ 4 เดือนเริ่มต้นที่นี่ ดินแดนที่ไม่ได้มีดีแค่อารยธรรมโบราณ แต่ยังเต็มไปด้วยความหลากหลายทางภูมิประเทศที่ท้าทายขีดจำกัด ตั้งแต่การมุดถ้ำใต้ดิน ขับรถลัดเลาะสันเขา ไปจนถึงการแบกเป้พิชิตยอดภูเขาไฟ</p>
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 40px auto;">
+      <p class="description">บันทึกพิกัดการเดินทางข้ามแดนจังโก้ ไล่เรียงจากความลึกของหุบเขาทองแดงทางตอนเหนือ ไต่ความสูงเสียดฟ้าบนภูเขาไฟ ดิ่งลึกสู่อารยธรรมโบราณกลางป่าดิบชื้น และไปจบที่มหัศจรรย์ธรรมชาติแห่งคาบสมุทรยูคาทาน</p>
     </div>
 
     <div class="divider"></div>
 
     <section class="travel-section">
-      
-      <div class="feature-row">
-        <div class="feature-text">
-          <span style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">The Ancient Echoes</span>
-          <h3>The Pyramid Expeditions</h3>
-          <p>สัมผัสความยิ่งใหญ่ของสถาปัตยกรรมระดับโลก เริ่มต้นที่ <strong>Teotihuacán</strong> มหานครแห่งทวยเทพที่มี "Pyramid of the Sun" อันมหึมาตั้งตระหง่าน ก่อนจะลงใต้สู่คาบสมุทรยูคาทานเพื่อเยือน <strong>Chichén Itzá</strong> หนึ่งในเจ็ดสิ่งมหัศจรรย์ของโลกยุคใหม่ ที่สะท้อนความอัจฉริยะด้านดาราศาสตร์ของชาวมายาผ่านเงาตกกระทบรูปงูขนาดยักษ์ในช่วงวิษุวัต</p>
-        </div>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1565624783669-eb8eb2baea84?auto=format&fit=crop&w=800&q=80" alt="Teotihuacan Pyramids">
-        </div>
-      </div>
+      <div class="itinerary-timeline">
 
-      <div class="feature-row">
-        <div class="feature-text">
-          <span style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Underworld Waters</span>
-          <h3>Cenotes of Yucatán</h3>
-          <p>หลบความร้อนจากซากปรักหักพัง ลงสู่โลกใต้ดิน นี่คือหลุมยุบหินปูนธรรมชาติที่ซ่อนตัวอยู่กลางป่าดิบชื้น แสงอาทิตย์ที่สาดส่องลอดปากถ้ำลงมากระทบผิวน้ำสีคริสตัล เป็นพิกัดที่เพอร์เฟกต์ที่สุดสำหรับการกระโดดน้ำ ดำน้ำลึก และการลั่นชัตเตอร์เก็บภาพความมหัศจรรย์ของแสงและเงา</p>
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> Chihuahua (ตอนเหนือ)</span>
+          <h3 class="stop-title">Barrancas del Cobre (Copper Canyon)</h3>
+          <p class="stop-desc">เปิดทริปด้วยความดิบเถื่อนของกลุ่มหุบเขาทองแดงที่ลึกและยิ่งใหญ่กว่าแกรนด์แคนยอน นั่งรถไฟ El Chepe ลัดเลาะขอบเหว และเทรคกิ้งลงไปซึมซับความยิ่งใหญ่ของธรรมชาติที่ซ่อนตัวอยู่เบื้องล่าง</p>
+          <span class="highlight-tag">🏞️ Canyon Trekking</span> <span class="highlight-tag">🚂 Scenic Train</span>
         </div>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1605333390977-6e4cdce13926?auto=format&fit=crop&w=800&q=80" alt="Cenote in Mexico">
-        </div>
-      </div>
 
-      <div class="feature-row">
-        <div class="feature-text">
-          <span style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">The Ultimate Road Trip</span>
-          <h3>Baja California Route</h3>
-          <p>เส้นทางในฝันของสาย Overlander การจับพวงมาลัยลุยฝุ่นหรือควบมอเตอร์ไซค์ลัดเลาะแนวชายฝั่งยาวนับพันกิโลเมตร ภูมิประเทศเปลี่ยนผ่านจากทะเลทรายแห้งแล้ง ดงกระบองเพชรยักษ์ ไปจนถึงหน้าผาที่ตัดกับสีครามของมหาสมุทรแปซิฟิก เป็นเส้นทางที่มอบอิสระในการเดินทางอย่างแท้จริง</p>
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> State of Mexico (ตอนกลาง)</span>
+          <h3 class="stop-title">Nevado de Toluca & Teotihuacán</h3>
+          <p class="stop-desc">ปรับตัวกับความสูงด้วยการเทรคกิ้งพิชิตภูเขาไฟ <strong>Nevado de Toluca</strong> ที่มีทะเลสาบปล่องภูเขาไฟซ่อนอยู่ จากนั้นลงมาสัมผัสความยิ่งใหญ่ของมหานครแห่งทวยเทพ <strong>Teotihuacán</strong> และยืนตะลึงหน้า Pyramid of the Sun อันมหึมา</p>
+          <span class="highlight-tag">🌋 Volcano Hike</span> <span class="highlight-tag">🏛️ Ancient Pyramid</span>
         </div>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&w=800&q=80" alt="Baja California Desert Road">
-        </div>
-      </div>
 
-      <div class="feature-row">
-        <div class="feature-text">
-          <span style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">High Altitude Challenge</span>
-          <h3>Iztaccíhuatl Volcano Trek</h3>
-          <p>เปลี่ยนโหมดมาสวมรองเท้าเทรคกิ้งและแบกเป้ขึ้นที่สูง กับการท้าทายเส้นทางปีนภูเขาไฟ "หญิงสาวที่หลับใหล" (Iztaccíhuatl) ซึ่งสูงเป็นอันดับ 3 ของเม็กซิโก เส้นทางนี้ต้องฝ่าฟันอุณหภูมิที่ลดฮวบและออกซิเจนที่เบาบาง เพื่อแลกกับวิวพาโนรามาของธารหิมะและภูเขาไฟ Popocatépetl ที่ยังคงคุกรุ่นอยู่เบื้องหน้า</p>
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> Oaxaca (ตอนใต้)</span>
+          <h3 class="stop-title">Monte Albán</h3>
+          <p class="stop-desc">ศูนย์กลางแห่งอารยธรรมซาโปเทค ซากเมืองโบราณที่ตั้งตระหง่านอยู่บนยอดเขาราบเรียบ สามารถมองเห็นวิวหุบเขาโออาซากาได้แบบพาโนรามา</p>
+          <span class="highlight-tag">⛰️ Mountaintop Ruins</span>
         </div>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1596700869680-77f6b907df3c?auto=format&fit=crop&w=800&q=80" alt="Iztaccihuatl Volcano">
-        </div>
-      </div>
 
-      <div class="feature-row">
-        <div class="feature-text">
-          <span style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Deep Earth Ravines</span>
-          <h3>Copper Canyon</h3>
-          <p>ยิ่งใหญ่ ลึกล้ำ และดิบเถื่อนยิ่งกว่าแกรนด์แคนยอน กลุ่มหุบเขาทองแดงแห่งนี้คือบทพิสูจน์ความยิ่งใหญ่ของธรรมชาติ สามารถเลือกนั่งรถไฟสาย El Chepe ไต่ขอบเหวทะลุอุโมงค์ หรือจะเดินป่าดิ่งลึกลงไปกางเต็นท์ในหุบเขา เพื่อสัมผัสวิถีชีวิตดั้งเดิมของชนเผ่าพื้นเมือง Tarahumara ที่ซ่อนตัวอยู่ภายใน</p>
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> Chiapas (ตะวันออกเฉียงใต้)</span>
+          <h3 class="stop-title">Palenque</h3>
+          <p class="stop-desc">มุดเข้าสู่ป่าดิบชื้นเพื่อตามหาพีระมิดแห่งชาวมายาที่ซ่อนตัวอยู่ใต้ร่มไม้หนาทึบ ที่นี่มีสถาปัตยกรรมที่วิจิตรบรรจงและเสียงสัตว์ป่าที่ทำให้รู้สึกเหมือนหลุดเข้าไปในฉากภาพยนตร์ Indiana Jones</p>
+          <span class="highlight-tag">🌿 Jungle Expedition</span>
         </div>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1517436073-3b1b1178a55b?auto=format&fit=crop&w=800&q=80" alt="Copper Canyon Mexico">
-        </div>
-      </div>
 
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> Yucatán (คาบสมุทรยูคาทาน)</span>
+          <h3 class="stop-title">Uxmal, Chichén Itzá & Cenotes</h3>
+          <p class="stop-desc">เข้าสู่ใจกลางอารยธรรมมายา เริ่มจากพีระมิดฐานวงรีสุดแปลกตาที่ <strong>Uxmal</strong> ก่อนจะไปเยือนสิ่งมหัศจรรย์ของโลก <strong>Chichén Itzá</strong> และคลายร้อนด้วยการกระโดดน้ำใน <strong>Cenote</strong> สระน้ำใต้ดินใสแจ๋วที่เกิดจากหลุมยุบหินปูน</p>
+          <span class="highlight-tag">🌟 World Wonder</span> <span class="highlight-tag">🤿 Cave Swimming</span>
+        </div>
+
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> Yucatán (ชายฝั่งเหนือ)</span>
+          <h3 class="stop-title">Las Coloradas (Pink Salt Lake)</h3>
+          <p class="stop-desc">พักเบรกจากโบราณสถาน ไปชมความมหัศจรรย์ทางธรรมชาติ ทะเลสาบเกลือสีชมพูช็อกกิ้งพิงก์ที่ตัดกับสีฟ้าของท้องฟ้า พิกัดถ่ายรูปที่สวยสะกดสายตา</p>
+          <span class="highlight-tag">🦩 Pink Lake</span> <span class="highlight-tag">📸 Photography</span>
+        </div>
+
+        <div class="itinerary-stop">
+          <span class="stop-location"><i class="fa-solid fa-map-pin"></i> Quintana Roo (ริมฝั่งแคริบเบียน)</span>
+          <h3 class="stop-title">Ixmoja (Cobá) & Tulum</h3>
+          <p class="stop-desc">ปิดท้ายเส้นทางเม็กซิโกด้วยการลุยเมืองโบราณ <strong>Cobá</strong> เพื่อชมพีระมิด <strong>Ixmoja</strong> ที่สูงตระหง่านกลางป่า ก่อนจะไปผ่อนคลายที่ <strong>Tulum</strong> ป้อมปราการชาวมายาเพียงแห่งเดียวที่ตั้งอยู่ริมหน้าผา มองเห็นน้ำทะเลสีเทอร์ควอยซ์ของทะเลแคริบเบียน</p>
+          <span class="highlight-tag">🌊 Coastal Ruins</span> <span class="highlight-tag">🌴 Caribbean Sea</span>
+        </div>
+
+      </div>
     </section>
 
     <div class="divider"></div>
