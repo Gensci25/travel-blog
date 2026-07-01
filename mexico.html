@@ -13,215 +13,210 @@
   
   <style>
     :root {
-      --bg-color: #FAFAF7;
-      --surface-color: #FFFFFF;
-      --text-main: #2A2A28;
-      --text-muted: #70706C;
-      --accent-primary: #C05A11; /* โทนสีดินเผา Clay/Terracotta เข้ากับละติน */
-      --border-color: #E6E6E2;
-      --danger-color: #D32F2F;
-      --safe-color: #2E7D32;
+      --bg-color: #FAFAF7; --surface-color: #FFFFFF; --text-main: #2A2A28; 
+      --text-muted: #70706C; --accent-primary: #C05A11; --border-color: #E6E6E2;
+      --danger-color: #D32F2F; --safe-color: #2E7D32;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { 
-      background-color: var(--bg-color); 
-      color: var(--text-main); 
-      font-family: 'Kanit', sans-serif;
-      line-height: 1.6;
-      padding-bottom: 80px; /* เผื่อพื้นที่ให้ Bottom Nav บนมือถือ */
-    }
-
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Kanit', sans-serif; line-height: 1.6; padding-bottom: 80px; }
     .page { max-width: 800px; margin: 0 auto; padding: 20px; }
     .divider { height: 1px; background-color: var(--border-color); margin: 40px 0; }
 
-    /* Country Hero Banner */
-    .country-hero {
-      position: relative; margin-bottom: 30px; border-radius: 12px;
-      overflow: hidden; min-height: 250px; display: flex;
-      align-items: center; justify-content: center; background-color: #3E3C38;
-    }
+    /* Hero */
+    .country-hero { position: relative; margin-bottom: 30px; border-radius: 12px; overflow: hidden; min-height: 250px; display: flex; align-items: center; justify-content: center; background-color: #3E3C38; }
     .hero-text { position: relative; z-index: 2; text-align: center; color: #fff; width: 90%; }
-    .hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; }
+    .hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; line-height: 1.1; margin-top: 10px; }
 
-    /* --- FEATURE 1: Mobile Bottom Navigation Bar --- */
-    .bottom-nav {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid var(--border-color);
-      display: flex; justify-content: space-around;
-      padding: 10px 0; z-index: 999;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
-    }
-    .bottom-nav a {
-      text-decoration: none; color: var(--text-muted);
-      font-size: 0.8rem; font-family: 'Jost', sans-serif;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-    }
-    .bottom-nav a i { font-size: 1.2rem; }
-    .bottom-nav a:hover, .bottom-nav a.active { color: var(--accent-primary); }
-
-    /* --- FEATURE 2: Overland Timeline & Accordion --- */
+    /* Timeline & Accordion */
     .timeline { position: relative; margin: 40px 0; padding-left: 20px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 10px; bottom: 10px;
-      width: 2px; background-color: var(--accent-primary); opacity: 0.3;
-    }
-
-    /* ใช้ HTML <details> ทำ Accordion แบบไม่ต้องเขียนพึ่งพา JS */
-    details.timeline-stop {
-      background-color: var(--surface-color);
-      border: 1px solid var(--border-color);
-      border-radius: 8px; margin-bottom: 20px;
-      position: relative; transition: all 0.3s ease;
-    }
-    details.timeline-stop[open] {
-      border-color: var(--accent-primary);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; background-color: var(--accent-primary); opacity: 0.3; }
     
-    /* หัวข้อ Accordion (ก่อนกดขยาย) */
-    summary {
-      padding: 20px; list-style: none; cursor: pointer;
-      display: flex; flex-direction: column; position: relative;
-    }
-    summary::-webkit-details-marker { display: none; } /* ซ่อนลูกศรเดิมของเบราว์เซอร์ */
+    details.timeline-stop { background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px; position: relative; transition: all 0.3s ease; }
+    details.timeline-stop[open] { border-color: var(--accent-primary); box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
     
-    /* สร้างจุดกลมๆ บนเส้น Timeline */
-    summary::before {
-      content: ''; position: absolute; left: -27px; top: 26px;
-      width: 12px; height: 12px; border-radius: 50%;
-      background-color: var(--bg-color); border: 3px solid var(--accent-primary);
-      z-index: 2; transition: background-color 0.3s;
-    }
+    summary { padding: 20px; list-style: none; cursor: pointer; display: flex; flex-direction: column; position: relative; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: ''; position: absolute; left: -27px; top: 26px; width: 12px; height: 12px; border-radius: 50%; background-color: var(--bg-color); border: 3px solid var(--accent-primary); z-index: 2; transition: background-color 0.3s; }
     details.timeline-stop[open] summary::before { background-color: var(--accent-primary); }
 
     .stop-header { display: flex; justify-content: space-between; align-items: flex-start; }
     .stop-meta { font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 1px; }
-    .stop-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-top: 2px; }
-    .stop-short-desc { font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; }
+    .stop-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-top: 2px; }
     
-    /* เนื้อหาภายในกล่องหลังกดขยายลงมา (Accordion Content) */
     .stop-content { padding: 0 20px 20px 20px; border-top: 1px dashed var(--border-color); margin-top: 10px; padding-top: 20px; }
-    
-    /* การจัดกลุ่มกล่องย่อยข้อมูลเจาะลึก */
     .info-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
     @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; } }
-    
     .info-block { background-color: var(--bg-color); padding: 15px; border-radius: 6px; }
-    .info-block h4 { font-size: 0.95rem; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .info-block h4 { font-size: 0.95rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
     .info-block p { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* ป้ายเตือนข้อควรระวัง (Red Flags) */
     .alert-block { border-left: 3px solid var(--danger-color); background-color: #FFF8F8; }
     .alert-block h4 { color: var(--danger-color); }
-    
-    /* ปุ่มเปิดแผนที่ GPS ลิงก์ด่วน */
-    .maps-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 12px; background-color: var(--text-main); color: #fff;
-      text-decoration: none; border-radius: 4px; font-size: 0.8rem; margin-top: 8px;
-      font-family: 'Jost', sans-serif; transition: background-color 0.2s;
-    }
-    .maps-btn:hover { background-color: var(--accent-primary); }
 
-    /* --- FEATURE 3: Horizontal Swipe Cards Container --- */
-    .swipe-container {
-      display: flex; gap: 15px; overflow-x: auto;
-      padding: 10px 5px 20px 5px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .swipe-card {
-      flex: 0 0 260px; scroll-snap-align: start;
-      background-color: var(--surface-color);
-      border: 1px solid var(--border-color); border-radius: 8px;
-      padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.01);
-    }
-    .swipe-card h3 { font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-    .swipe-card p { font-size: 0.9rem; color: var(--text-muted); }
+    /* Bottom Nav */
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 10px 0; z-index: 999; box-shadow: 0 -4px 20px rgba(0,0,0,0.03); }
+    .bottom-nav a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; font-family: 'Jost', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bottom-nav a:hover, .bottom-nav a.active { color: var(--accent-primary); }
   </style>
 </head>
 <body>
-
   <div style="height: 4px; background-color: var(--accent-primary);"></div>
-  
   <main class="page">
     
     <div class="country-hero">
+      <img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=1200&q=80" style="position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); z-index: 1;" alt="Mexico">
       <div class="hero-text">
-        <span style="font-family: 'Jost', sans-serif; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">Overland Log</span>
-        <h1>MEXICO MASTER</h1>
+        <span style="font-family: 'Jost', sans-serif; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">Route Plan</span>
+        <h1>Mexico Expedition</h1>
+        <p style="font-size: 1rem; opacity: 0.9; margin-top: 5px;">เหนือจรดใต้: สู่ปลายทางแห่งแคริบเบียน</p>
       </div>
     </div>
 
-    <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 20px;">💡 บนมือถือ: ลองทดสอบกด "เปิดกล่องประเทศ" หรือ "ปัดเลื่อนแอปการเดินทาง" ด้านล่าง</p>
-
     <section id="timeline-section">
-      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 20px;">The Overland Timeline</h2>
-      
       <div class="timeline">
         
+        <!-- STOP 1: North -->
         <details class="timeline-stop" open>
           <summary>
             <div class="stop-header">
-              <span class="stop-meta">Stop 01 · Chihuahua</span>
-              <span style="font-size: 0.9rem; color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+              <span class="stop-meta">01 · Chihuahua (Start)</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
             </div>
             <h3 class="stop-title">Barrancas del Cobre</h3>
-            <p class="stop-short-desc">มหากาพย์หุบเขาทองแดงทางตอนเหนือ ลึกและดิบเถื่อนกว่าแกรนด์แคนยอน</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">หุบเขาทองแดงที่ลึกและกว้างใหญ่ จุดเริ่มต้นความดิบเถื่อนทางตอนเหนือ</p>
           </summary>
           <div class="stop-content">
-            <p style="font-size: 0.95rem; margin-bottom: 15px;">เส้นทางธรรมชาติระดับดิบสุดขั้ว เหมาะสำหรับคนที่ต้องการขับขี่ฝ่าเส้นทางฝุ่นเพื่อลงไปกางเต็นท์สัมผัสความยิ่งใหญ่ใต้หุบเขา</p>
-            
             <div class="info-grid">
               <div class="info-block">
-                <h4><i class="fa-solid fa-bus" style="color: var(--accent-primary);"></i> Transit & Terrain</h4>
-                <p><strong>การเดินทาง:</strong> นั่งรถไฟ Scenic Train 'El Chepe' ลัดเลาะขอบเหว หรือขับออฟโรดเข้าทางด่านเหนือ</p>
-                <p style="margin-top: 5px;"><strong>สภาพเส้นทาง:</strong> ทางลูกรังและกรวดหนาช่วง 40 กม. สุดท้าย แนะนำรถยกสูงหรือมอเตอร์ไซค์สายลุย</p>
+                <h4><i class="fa-solid fa-route"></i> Logistics</h4>
+                <p>นั่งรถไฟ El Chepe หรือขับรถออฟโรดฝ่าเส้นทางฝุ่น เหมาะสำหรับการตั้งแคมป์</p>
               </div>
-              
-              <div class="info-block">
-                <h4><i class="fa-solid fa-camera" style="color: var(--accent-primary);"></i> Photo Spots & GPS</h4>
-                <p><strong>พิกัดลับ:</strong> จุดชมวิวขอบผาตัดตรง Divisadero ท้องฟ้าเปิดช่วงเช้า แสงสาดเข้าหุบเขาสวยที่สุด</p>
-                <a href="https://maps.google.com/?q=27.5256,-107.7405" target="_blank" rel="noopener" class="maps-btn">
-                  <i class="fa-solid fa-map-location-dot"></i> Open in Google Maps
-                </a>
-              </div>
-
-              <div class="info-block">
-                <h4><i class="fa-solid fa-backpack" style="color: var(--accent-primary);"></i> Gear & Plan B</h4>
-                <p><strong>อุปกรณ์:</strong> เสื้อกันลมหนา (กลางคืนอุณหภูมิลดฮวบ), แผนที่แบบ Offline Survival เพราะจุดนี้อับสัญญาณเน็ต</p>
-                <p style="margin-top: 5px;"><strong>แผนสำรอง:</strong> หากทางลงหุบเขาปิดจากดินสไลด์ ให้เปลี่ยนเส้นทางไปชมเมืองเก่า Creel แทน</p>
-              </div>
-
               <div class="info-block alert-block">
-                <h4><i class="fa-solid fa-triangle-exclamation"></i> Red Flags & Safety</h4>
-                <p><strong>คำเตือน:</strong> หลีกเลี่ยงการขับรถหรือเดินทางข้ามเมืองในเขตนี้ช่วงเวลากลางคืนเด็ดขาด สัญญาณโทรศัพท์จะขาดหายเป็นช่วงๆ เติมเสบียงและน้ำมันให้เต็มถังจากจุดจอดก่อนหน้า</p>
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> Safety</h4>
+                <p>งดเดินทางในเวลากลางคืนเด็ดขาด สัญญาณเน็ตขาดหาย ควรเตรียมเสบียงให้พร้อม</p>
               </div>
             </div>
           </div>
         </details>
 
+        <!-- STOP 2: Central Mountains -->
         <details class="timeline-stop">
           <summary>
             <div class="stop-header">
-              <span class="stop-meta">Stop 02 · State of Mexico</span>
-              <span style="font-size: 0.9rem; color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+              <span class="stop-meta">02 · State of Mexico</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
             </div>
-            <h3 class="stop-title">Teotihuacán</h3>
-            <p class="stop-short-desc">มหานครโบราณแห่งทวยเทพและพีระมิดพระอาทิตย์อันยิ่งใหญ่</p>
+            <h3 class="stop-title">Nevado de Toluca & Teotihuacán</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">เทรคกิ้งภูเขาไฟ และเยือนมหานครแห่งทวยเทพ</p>
           </summary>
           <div class="stop-content">
             <div class="info-grid">
               <div class="info-block">
-                <h4><i class="fa-solid fa-bus"></i> Transit & Terrain</h4>
-                <p>นั่งรถบัสโดยสารตรงจากสถานี Terminal del Norte ในเม็กซิโกซิตี้ ขับขี่ลาดยางสบายตลอดทาง</p>
+                <h4><i class="fa-solid fa-person-hiking"></i> Gear</h4>
+                <p>สำหรับ Nevado de Toluca ต้องเตรียมรองเท้าเทรคกิ้งและเสื้อกันลม เพราะลมแรงและหนาวมาก</p>
               </div>
               <div class="info-block alert-block">
-                <h4><i class="fa-solid fa-shield-halved"></i> Rules & Regulations</h4>
-                <p><strong>กฎเหล็ก:</strong> ปัจจุบันห้ามปีนขึ้นไปบนยอดพีระมิดเด็ดขาด และห้ามนำโดรนขึ้นบินหากไม่มีใบอนุญาตพิเศษจาก INAH</p>
+                <h4><i class="fa-solid fa-circle-exclamation"></i> Rules</h4>
+                <p>Teotihuacán ปัจจุบันห้ามปีนยอดพีระมิดแล้ว และงดใช้โดรนหากไม่มีใบอนุญาต</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 3: South / Oaxaca -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">03 · Oaxaca</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Monte Albán</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">เมืองโบราณบนยอดเขาของชาวซาโปเทค (Zapotec)</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-camera"></i> Photo Spots</h4>
+                <p>วิวพาโนรามาจากยอดเขาช่วงบ่ายแก่ๆ จะเห็นเงาตกกระทบลานกว้างสวยงามมาก</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 4: Chiapas Jungle -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">04 · Chiapas</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Palenque</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">พีระมิดกลางป่าดิบชื้น ได้ฟีลลิ่งนักสำรวจแบบสุดๆ</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-bug"></i> Gear Check</h4>
+                <p>อากาศร้อนชื้นและแมลงเยอะมาก สเปรย์กันยุงเขตร้อนและน้ำดื่มคือสิ่งจำเป็น</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 5: Yucatan Peninsula (West) -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">05 · Yucatán</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Uxmal, Chichén Itzá & Cenotes</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">สิ่งมหัศจรรย์ของโลกและสระน้ำใต้ดิน</p>
+          </summary>
+          <div class="stop-content">
+            <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-water"></i> Eco Rule</h4>
+                <p>ก่อนลงว่ายน้ำใน Cenote บังคับให้อาบน้ำล้างตัว และห้ามใช้ครีมกันแดดที่มีสารเคมีเด็ดขาด</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 6: Yucatan Peninsula (North Coast) -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">06 · Yucatán</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Pink Salt Lake (Las Coloradas)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">ทะเลสาบเกลือสีชมพูสุดอันซีนทางตอนเหนือของคาบสมุทร</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-sun"></i> Best Light</h4>
+                <p>สีชมพูจะชัดที่สุดตอนแดดจัดช่วงเที่ยงถึงบ่าย ห้ามลงเล่นน้ำเนื่องจากความเค็มระดับสูง</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 7: Quintana Roo (End) -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">07 · Quintana Roo (Exit Point)</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Ixmoja (Cobá) & Tulum</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">พีระมิดป่าและป้อมปราการริมทะเลแคริบเบียน จุดเชื่อมสู่ประเทศต่อไป</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-passport"></i> Next Destination</h4>
+                <p>จาก Tulum สามารถใช้บริการรถบัสข้ามแดนลงใต้สู่ Belize เพื่อทะลุอเมริกากลาง หรือไปสนามบิน Cancun เพื่อบินตรงสู่โคลอมเบีย</p>
               </div>
             </div>
           </div>
@@ -230,59 +225,12 @@
       </div>
     </section>
 
-    <div class="divider" id="apps-section"></div>
-
-    <section>
-      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 10px;">Digital Survival Kit</h2>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">แอปพลิเคชันที่แนะนำให้ดาวน์โหลดติดเครื่องไว้ล่วงหน้า</p>
-      
-      <div class="swipe-container">
-        <div class="swipe-card">
-          <h3><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp</h3>
-          <p>แอปสื่อสารหลักของละตินอเมริกา ใช้สำหรับติดต่อที่พัก รถเช่า และไกด์ท้องถิ่น (สำคัญเท่า LINE ของไทย)</p>
-        </div>
-        <div class="swipe-card">
-          <h3><i class="fa-solid fa-car" style="color: #FF7D00;"></i> DiDi / Uber</h3>
-          <p>ใช้เรียกยานพาหนะในเขตเมืองใหญ่ ปลอดภัย คุมราคาได้ดีกว่าการโบกเรียกแท็กซี่เถื่อนตามข้างทาง</p>
-        </div>
-        <div class="swipe-card">
-          <h3><i class="fa-solid fa-language" style="color: #4285F4;"></i> Google Translate</h3>
-          <p>ย้ำเตือนให้ดาวน์โหลด <strong>"แพ็กเกจภาษาสเปนแบบออฟไลน์"</strong> เก็บไว้ล่วงหน้าเพื่อใช้งานในจุดอับสัญญาณเน็ต</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider" id="logistics-section"></div>
-
-    <section style="margin-bottom: 40px;">
-      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 20px;">Logistics & Border Rules</h2>
-      
-      <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px;">
-        <h4 style="margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-wallet" style="color: var(--accent-primary);"></i> Money & Budget Strategy</h4>
-        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">ในแถบพื้นที่ชนบทหรือซากประวัติศาสตร์ <strong>"Cash is King"</strong> แนะนำให้พกเงินสดเปโซติดตัวไว้เสมอ วัฒนธรรมการให้ทิป (Propina) ตามร้านอาหารปกติจะอยู่ที่ประมาณ 10-15% ของค่าอาหาร</p>
-        
-        <h4 style="margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-square-parking" style="color: var(--accent-primary);"></i> Basecamp & Secure Parking</h4>
-        <p style="font-size: 0.95rem; color: var(--text-muted);">สำหรับนักเดินทางที่ขับรถแคมป์ปิ้งหรือมีสัมภาระเยอะ ควรเลือกที่พักที่มีระบบที่จอดรถปิดมิดชิด (Estacionamiento Privado) เพื่อป้องกันการโจรกรรมงัดแงะกระเป๋าเดินทาง</p>
-      </div>
-    </section>
-
-    <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 40px;">© 2026 Bank's Travelogue · Master Framework v1</p>
-
   </main>
 
-  <nav class="bottom-nav" aria-label="Mobile Navigation">
-    <a href="#timeline-section" class="active">
-      <i class="fa-solid fa-map-location-dot"></i>
-      <span>Timeline</span>
-    </a>
-    <a href="#apps-section">
-      <i class="fa-solid fa-mobile-screen-button"></i>
-      <span>Apps</span>
-    </a>
-    <a href="#logistics-section">
-      <i class="fa-solid fa-passport"></i>
-      <span>Logistics</span>
-    </a>
+  <nav class="bottom-nav">
+    <a href="#timeline-section" class="active"><i class="fa-solid fa-map-location-dot"></i><span>Timeline</span></a>
+    <a href="#"><i class="fa-solid fa-mobile-screen-button"></i><span>Apps</span></a>
+    <a href="#"><i class="fa-solid fa-passport"></i><span>Logistics</span></a>
   </nav>
 
 </body>
