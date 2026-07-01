@@ -12,14 +12,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
   <style>
-    /* (CSS เดิมทั้งหมด) */
-    :root { --bg-color: #FAFAF7; --surface-color: #FFFFFF; --text-main: #2A2A28; --text-muted: #70706C; --accent-primary: #C05A11; --border-color: #E6E6E2; --danger-color: #D32F2F; }
+    :root {
+      --bg-color: #FAFAF7; --surface-color: #FFFFFF; --text-main: #2A2A28; 
+      --text-muted: #70706C; --accent-primary: #C05A11; --border-color: #E6E6E2;
+      --danger-color: #D32F2F; --safe-color: #2E7D32;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Kanit', sans-serif; line-height: 1.6; padding-bottom: 80px; }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Kanit', sans-serif; line-height: 1.6; padding-bottom: 80px; scroll-behavior: smooth; }
     .page { max-width: 800px; margin: 0 auto; padding: 20px; }
+    .divider { height: 1px; background-color: var(--border-color); margin: 40px 0; }
+
+    /* Hero */
     .country-hero { position: relative; margin-bottom: 30px; border-radius: 12px; overflow: hidden; min-height: 250px; display: flex; align-items: center; justify-content: center; background-color: #3E3C38; }
     .hero-text { position: relative; z-index: 2; text-align: center; color: #fff; width: 90%; }
-    .hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; line-height: 1.1; margin-top: 10px; }
+    .hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; line-height: 1.1; margin-top: 10px; text-shadow: 2px 4px 10px rgba(0,0,0,0.6); }
+
+    /* Timeline & Accordion */
     .timeline { position: relative; margin: 40px 0; padding-left: 20px; }
     .timeline::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; background-color: var(--accent-primary); opacity: 0.3; }
     details.timeline-stop { background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px; position: relative; transition: all 0.3s ease; }
@@ -33,86 +41,60 @@
     .stop-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-top: 2px; }
     .stop-content { padding: 0 20px 20px 20px; border-top: 1px dashed var(--border-color); margin-top: 10px; padding-top: 20px; }
     
-    /* =========================================
-       ✨ เพิ่ม CSS สำหรับแกลเลอรีสไตล์ Instagram
-       ========================================= */
-    .ig-carousel {
-      margin: 15px 0;
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      background: #000;
-    }
-    
-    .ig-slides {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* ซ่อน Scrollbar (Firefox) */
-    }
-    .ig-slides::-webkit-scrollbar { display: none; } /* ซ่อน Scrollbar (Chrome/Safari) */
-    
-    .ig-slide {
-      flex: 0 0 100%;
-      scroll-snap-align: center;
-      position: relative;
-    }
-    
-    /* รูปภาพให้เป็นสัดส่วน 4:5 แบบ IG (ปรับลดความสูงได้ตามชอบ) */
-    .ig-slide img {
-      width: 100%;
-      height: 400px; 
-      object-fit: cover;
-      display: block;
-    }
-    
-    /* แถบคำบรรยายใต้ภาพ */
-    .ig-caption {
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      padding: 12px 15px 30px 15px; /* เผื่อพื้นที่ด้านล่างให้จุดไข่ปลา */
-      font-size: 0.9rem;
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-    }
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
+    @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+    .info-block { background-color: var(--bg-color); padding: 15px; border-radius: 6px; }
+    .info-block h4 { font-size: 0.95rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
+    .info-block p { font-size: 0.9rem; color: var(--text-muted); }
+    .alert-block { border-left: 3px solid var(--danger-color); background-color: #FFF8F8; }
+    .alert-block h4 { color: var(--danger-color); }
 
-    /* จุดไข่ปลา (Dots Indicator) */
-    .ig-dots {
-      position: absolute;
-      bottom: 10px;
-      left: 0; right: 0;
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      z-index: 10;
-    }
-    .ig-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.4);
-      transition: background-color 0.3s ease;
-    }
+    /* IG-Style Carousel */
+    .ig-carousel { margin: 15px 0; position: relative; border-radius: 8px; overflow: hidden; background: #000; }
+    .ig-slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .ig-slides::-webkit-scrollbar { display: none; }
+    .ig-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
+    .ig-slide img { width: 100%; height: 400px; object-fit: cover; display: block; }
+    .ig-caption { background: rgba(0, 0, 0, 0.7); color: #fff; padding: 12px 15px 30px 15px; font-size: 0.9rem; position: absolute; bottom: 0; left: 0; right: 0; }
+    .ig-dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; z-index: 10; }
+    .ig-dot { width: 6px; height: 6px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.4); transition: background-color 0.3s ease; }
     .ig-dot.active { background-color: #fff; transform: scale(1.2); }
+
+    /* Horizontal Swipe Cards (Apps) */
+    .swipe-container { display: flex; gap: 15px; overflow-x: auto; padding: 10px 5px 20px 5px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .swipe-card { flex: 0 0 260px; scroll-snap-align: start; background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
+    .swipe-card h3 { font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .swipe-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* Bottom Nav */
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 10px 0; z-index: 999; box-shadow: 0 -4px 20px rgba(0,0,0,0.03); }
+    .bottom-nav a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; font-family: 'Jost', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: color 0.3s; }
+    .bottom-nav a:hover, .bottom-nav a.active { color: var(--accent-primary); }
   </style>
 </head>
 <body>
   <div style="height: 4px; background-color: var(--accent-primary);"></div>
   <main class="page">
     
+    <!-- HERO SECTION -->
     <div class="country-hero">
       <img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=1200&q=80" style="position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); z-index: 1;" alt="Mexico">
       <div class="hero-text">
-        <span style="font-family: 'Jost', sans-serif; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">Route Plan</span>
+        <span style="font-family: 'Jost', sans-serif; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">Master Template</span>
         <h1>Mexico Expedition</h1>
         <p style="font-size: 1rem; opacity: 0.9; margin-top: 5px;">เหนือจรดใต้: สู่ปลายทางแห่งแคริบเบียน</p>
       </div>
     </div>
 
+    <!-- ==========================================
+         SECTION 1: TIMELINE & ACCORDION
+         ========================================== -->
     <section id="timeline-section">
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 20px;">The Overland Route</h2>
+      
       <div class="timeline">
         
-        <!-- STOP 1: ใส่ระบบ IG Gallery เข้าไป -->
+        <!-- STOP 1: แบบละเอียด มี IG Carousel -->
         <details class="timeline-stop" open>
           <summary>
             <div class="stop-header">
@@ -122,48 +104,40 @@
             <h3 class="stop-title">Barrancas del Cobre</h3>
             <p style="font-size: 0.9rem; color: var(--text-muted);">หุบเขาทองแดงที่ลึกและกว้างใหญ่ จุดเริ่มต้นความดิบเถื่อนทางตอนเหนือ</p>
           </summary>
-          
           <div class="stop-content">
             
-            <!-- 📸 ระบบ Photo Gallery สไตล์ IG -->
+            <!-- IG Carousel -->
             <div class="ig-carousel">
-              <!-- กล่องใส่รูป เลื่อนปัดซ้ายขวาได้ -->
               <div class="ig-slides">
-                
-                <!-- รูปที่ 1 -->
                 <div class="ig-slide">
                   <img src="https://images.unsplash.com/photo-1517436073-3b1b1178a55b?auto=format&fit=crop&w=800&q=80" alt="Copper Canyon 1">
                   <div class="ig-caption">📸 จุดชมวิวขอบผา Divisadero แสงเช้าสาดเข้าหุบเขาพอดี ลมแรงมาก!</div>
                 </div>
-                
-                <!-- รูปที่ 2 -->
                 <div class="ig-slide">
                   <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?auto=format&fit=crop&w=800&q=80" alt="Copper Canyon 2">
                   <div class="ig-caption">🚂 รถไฟ El Chepe ลัดเลาะริมหน้าผา เส้นทางนี้ใช้เวลาเดินทางกว่า 9 ชั่วโมง</div>
                 </div>
-
-                <!-- รูปที่ 3 -->
-                <div class="ig-slide">
-                  <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80" alt="Copper Canyon 3">
-                  <div class="ig-caption">⛺ พิกัดกางเต็นท์คืนแรก อากาศหนาวจับใจแต่ดาวชัดมาก</div>
-                </div>
-                
               </div>
-              
-              <!-- จุดไข่ปลา (Dots) -->
               <div class="ig-dots">
                 <span class="ig-dot active"></span>
                 <span class="ig-dot"></span>
-                <span class="ig-dot"></span>
               </div>
             </div>
-            <!-- จบแกลเลอรี -->
 
-            <p style="font-size: 0.95rem; margin-top: 15px; color: var(--text-main);">เส้นทางธรรมชาติระดับดิบสุดขั้ว เหมาะสำหรับคนที่ต้องการขับขี่ฝ่าเส้นทางฝุ่นเพื่อลงไปกางเต็นท์สัมผัสความยิ่งใหญ่ใต้หุบเขา</p>
+            <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-route" style="color: var(--accent-primary);"></i> Transit & Terrain</h4>
+                <p>นั่งรถไฟ El Chepe หรือขับรถออฟโรดฝ่าเส้นทางฝุ่น ทางลูกรัง 40 กม. สุดท้าย</p>
+              </div>
+              <div class="info-block alert-block">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> Safety</h4>
+                <p>งดเดินทางในเวลากลางคืนเด็ดขาด สัญญาณเน็ตขาดหาย ควรเตรียมเสบียงให้พร้อม</p>
+              </div>
+            </div>
           </div>
         </details>
 
-        <!-- ที่เหลือคือสถานที่อื่นๆ (สมมติว่ายังมีอยู่เหมือนโค้ดก่อนหน้า) -->
+        <!-- STOP 2 -->
         <details class="timeline-stop">
           <summary>
             <div class="stop-header">
@@ -174,33 +148,189 @@
             <p style="font-size: 0.9rem; color: var(--text-muted);">เทรคกิ้งภูเขาไฟ และเยือนมหานครแห่งทวยเทพ</p>
           </summary>
           <div class="stop-content">
-             <p>รออัปเดตรูปภาพหลังการเดินทาง...</p>
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-person-hiking" style="color: var(--accent-primary);"></i> Gear</h4>
+                <p>เตรียมรองเท้าเทรคกิ้งและเสื้อกันลม เพราะลมแรงและหนาวมาก</p>
+              </div>
+              <div class="info-block alert-block">
+                <h4><i class="fa-solid fa-circle-exclamation"></i> Rules</h4>
+                <p>Teotihuacán ห้ามปีนยอดพีระมิด และงดใช้โดรนหากไม่มีใบอนุญาต</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 3 -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">03 · Oaxaca</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Monte Albán</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">เมืองโบราณบนยอดเขาของชาวซาโปเทค (Zapotec)</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-camera" style="color: var(--accent-primary);"></i> Photo Spots</h4>
+                <p>วิวพาโนรามาจากยอดเขาช่วงบ่ายแก่ๆ จะเห็นเงาตกกระทบลานกว้างสวยงามมาก</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 4 -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">04 · Chiapas</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Palenque</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">พีระมิดกลางป่าดิบชื้น ได้ฟีลลิ่งนักสำรวจแบบสุดๆ</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-bug" style="color: var(--accent-primary);"></i> Gear Check</h4>
+                <p>อากาศร้อนชื้นและแมลงเยอะมาก สเปรย์กันยุงเขตร้อนและน้ำดื่มคือสิ่งจำเป็น</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 5 -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">05 · Yucatán</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Uxmal, Chichén Itzá & Cenotes</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">สิ่งมหัศจรรย์ของโลกและสระน้ำใต้ดิน</p>
+          </summary>
+          <div class="stop-content">
+            <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-water" style="color: var(--accent-primary);"></i> Eco Rule</h4>
+                <p>ก่อนลงว่ายน้ำใน Cenote บังคับให้อาบน้ำล้างตัว และห้ามใช้ครีมกันแดดที่มีสารเคมีเด็ดขาด</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 6 -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">06 · Yucatán</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Pink Salt Lake (Las Coloradas)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">ทะเลสาบเกลือสีชมพูสุดอันซีนทางตอนเหนือของคาบสมุทร</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-sun" style="color: var(--accent-primary);"></i> Best Light</h4>
+                <p>สีชมพูจะชัดที่สุดตอนแดดจัดช่วงเที่ยงถึงบ่าย ห้ามลงเล่นน้ำเนื่องจากความเค็มระดับสูง</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- STOP 7 (END) -->
+        <details class="timeline-stop">
+          <summary>
+            <div class="stop-header">
+              <span class="stop-meta">07 · Quintana Roo (Exit)</span>
+              <span style="color: var(--accent-primary);"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <h3 class="stop-title">Ixmoja (Cobá) & Tulum</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">พีระมิดป่าและป้อมปราการริมทะเลแคริบเบียน จุดเชื่อมสู่ประเทศต่อไป</p>
+          </summary>
+          <div class="stop-content">
+             <div class="info-grid">
+              <div class="info-block">
+                <h4><i class="fa-solid fa-passport" style="color: var(--accent-primary);"></i> Next Destination</h4>
+                <p>ใช้บริการรถบัสข้ามแดนลงใต้สู่ Belize เพื่อทะลุอเมริกากลาง หรือไปสนามบิน Cancun เพื่อบินตรงสู่โคลอมเบีย</p>
+              </div>
+            </div>
           </div>
         </details>
 
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- ==========================================
+         SECTION 2: APPS (Digital Survival Kit)
+         ========================================== -->
+    <section id="apps-section">
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 10px;">Digital Survival Kit</h2>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">แอปพลิเคชันที่แนะนำให้ดาวน์โหลดติดเครื่องไว้ล่วงหน้า</p>
+      
+      <div class="swipe-container">
+        <div class="swipe-card">
+          <h3><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp</h3>
+          <p>แอปสื่อสารหลักของละตินอเมริกา ใช้สำหรับติดต่อที่พัก รถเช่า และไกด์ท้องถิ่น (สำคัญเท่า LINE ของไทย)</p>
+        </div>
+        <div class="swipe-card">
+          <h3><i class="fa-solid fa-car" style="color: #FF7D00;"></i> DiDi / Uber</h3>
+          <p>ใช้เรียกยานพาหนะในเขตเมืองใหญ่ ปลอดภัย คุมราคาได้ดีกว่าการโบกเรียกแท็กซี่เถื่อนตามข้างทาง</p>
+        </div>
+        <div class="swipe-card">
+          <h3><i class="fa-solid fa-language" style="color: #4285F4;"></i> Google Translate</h3>
+          <p>ย้ำเตือนให้ดาวน์โหลด <strong>"แพ็กเกจภาษาสเปนแบบออฟไลน์"</strong> เก็บไว้ล่วงหน้าเพื่อใช้งานในจุดอับสัญญาณเน็ต</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ==========================================
+         SECTION 3: LOGISTICS & BORDER RULES
+         ========================================== -->
+    <section id="logistics-section" style="margin-bottom: 40px;">
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 20px;">Logistics & Border Rules</h2>
+      
+      <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px;">
+        <h4 style="margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-wallet" style="color: var(--accent-primary);"></i> Money & Budget Strategy</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">ในแถบพื้นที่ชนบทหรือซากประวัติศาสตร์ <strong>"Cash is King"</strong> แนะนำให้พกเงินสดเปโซติดตัวไว้เสมอ วัฒนธรรมการให้ทิปตามร้านอาหารมักจะอยู่ที่ 10-15%</p>
+        
+        <h4 style="margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-square-parking" style="color: var(--accent-primary);"></i> Basecamp & Secure Parking</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted);">สำหรับคนขับรถแคมป์ปิ้ง ควรเลือกที่พักที่มีระบบที่จอดรถปิดมิดชิด (Estacionamiento Privado) เพื่อป้องกันการงัดแงะกระเป๋า</p>
+      </div>
+    </section>
+    
+    <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">© 2026 Bank's Travelogue · Master Framework</p>
   </main>
 
-  <!-- =========================================
-       ✨ Script เล็กๆ สำหรับเปลี่ยนจุดไข่ปลาตอนปัดรูป
-       ========================================= -->
+  <!-- ==========================================
+       BOTTOM NAVIGATION BAR
+       ========================================== -->
+  <nav class="bottom-nav">
+    <a href="#timeline-section" class="active"><i class="fa-solid fa-map-location-dot"></i><span>Timeline</span></a>
+    <a href="#apps-section"><i class="fa-solid fa-mobile-screen-button"></i><span>Apps</span></a>
+    <a href="#logistics-section"><i class="fa-solid fa-passport"></i><span>Logistics</span></a>
+  </nav>
+
+  <!-- ==========================================
+       SCRIPT: สำหรับให้จุดไข่ปลา IG เลื่อนตามรูป
+       ========================================== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const carousels = document.querySelectorAll('.ig-carousel');
-      
       carousels.forEach(carousel => {
         const slides = carousel.querySelector('.ig-slides');
         const dots = carousel.querySelectorAll('.ig-dot');
-        
         slides.addEventListener('scroll', () => {
-          // คำนวณว่าตอนนี้ปัดมาถึงรูปที่เท่าไหร่แล้ว
           let scrollPosition = slides.scrollLeft;
           let slideWidth = slides.clientWidth;
           let activeIndex = Math.round(scrollPosition / slideWidth);
-          
-          // เปลี่ยนสีจุดไข่ปลาให้ตรงกับรูป
           dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === activeIndex);
           });
